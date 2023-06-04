@@ -21,6 +21,8 @@ CREATE TABLE hotelInfo(
     phoneHotel NUMERIC NOT NULL,
     stars NUMERIC,
     imageHotel text NOT NULL
+    is_deleted boolean NOT NULL DEFAULT false
+    is_accept boolean NOT NULL DEFAULT false
 )
 
 -- create  room table 
