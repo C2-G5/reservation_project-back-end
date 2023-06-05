@@ -36,7 +36,20 @@ CREATE TABLE roominfo
     hotel_id INT ,
     FOREIGN KEY (hotel_id) REFERENCES hotelinfo (hotel_id)
 );
-
+CREATE TABLE roominfo
+(
+    room_id serial PRIMARY KEY,
+    room_type  VARCHAR(75) NOT NULL ,
+    number_of_room NUMERIC NOT NULL,
+    price NUMERIC NOT NULL,
+    number_of_beds NUMERIC NOT NULL,
+    floor_area NUMERIC NOT NULL,
+    descriptions VARCHAR(500) NOT NULL,
+    room_img text[] NOT NULL,
+    number_of_guests NUMERIC NOT NULL,
+    hotel_id INT ,
+    FOREIGN KEY (hotel_id) REFERENCES hotelinfo (hotel_id)
+);
 
 -------------------Payment Table------------------
 CREATE TABLE paymentinfo
