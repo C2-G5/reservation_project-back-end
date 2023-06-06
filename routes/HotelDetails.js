@@ -6,11 +6,11 @@ const pool = require("../config/dbConfig");
 // create post
 router.post("/",async(req,res)=>{
     try{
-  const {hotel_name,descriptions,city,phoneHotel,stars,imageHotel}=await req.body
-  const newHotel= pool.query(
-    "INSERT INTO hotelInfo (hotel_name,descriptions,city,phoneHotel,stars,imageHotel) VALUES($1,$2,$3,$4,$5,$6) RETURNING *",[hotel_name,descriptions,city,phoneHotel,stars,imageHotel]
+  const {hotel_name,descriptions,city,phoneHotel,stars,imageHotel,user_id}=await req.body
+  const newHotel= await pool.query(
+    "INSERT INTO hotelInfo (hotel_name,descriptions,city,phoneHotel,stars,imageHotel,user_id) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING *",[hotel_name,descriptions,city,phoneHotel,stars,imageHotel,user_id]
   );
-  res.json(newHotel.row[0])
+  res.json(newHotel.rows)
     }catch(err){
       console.log(err.message);
     }
@@ -21,7 +21,7 @@ router.post("/",async(req,res)=>{
 
 router.get('/', async(req, res) => {
     try {
-      const allHotels=await pool.query("SELECT * FROM hotelInfo")
+      const allHotels=await pool.query("SELECT * FROM hotelInfo WHERE is_accept = true AND is_deleted = false")
       res.json(allHotels.rows)
     } catch (error) {
       console.error(error.message);

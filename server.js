@@ -12,6 +12,7 @@ const payment = require("./routes/Payment");
 const adminHotel = require('./routes/admin-router/hotel_routes')
 const adminRome = require('./routes/admin-router/room-routes')
 const adminUsers = require('./routes/admin-router/Users-routes')
+const bookingRoutes = require('./routes/booking-routes')
 
 app.use(cors());
 app.use(express.json({ limit: "50mb" }));
@@ -24,6 +25,7 @@ app.use("/payment", payment);
 app.use("/admin/hotel",adminHotel);
 app.use("/admin/rooms",adminRome );
 app.use("/admin/users",adminUsers );
+app.use("/booking",bookingRoutes );
 
 // Start the server
 app.listen(port, () => {

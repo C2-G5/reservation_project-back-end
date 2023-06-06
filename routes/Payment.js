@@ -14,14 +14,15 @@ router.get("/", async (req, res) => {
 
 router.post("/", async function (req, res) {
   try {
+    const user_id = req.body.user_id;
     const card_name = req.body.card_name;
     const card_number = req.body.card_number;
     const expiration_date = req.body.expiration_date;
     const security_code = req.body.security_code;
     console.log(card_name, card_number, expiration_date, security_code);
     const payments = await pool.query(
-      "INSERT INTO paymentinfo (card_name, card_number, expiration_date, security_code) VALUES($1, $2, $3 , $4) RETURNING *",
-      [card_name, card_number, "2020-08-01", security_code]
+      "INSERT INTO paymentinfo (user_id, card_name, card_number, expiration_date, security_code) VALUES($1, $2, $3 , $4,$5) RETURNING *",
+      [user_id, card_name, card_number, '2024-05-10', security_code]
     );
     res.json(payments.rows);
   } catch (err) {
