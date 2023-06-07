@@ -45,10 +45,10 @@ router.get('/', async(req, res) => {
   router.put("/:id",async(req,res)=>{
     try {
       const {id}=req.params;
-      const {hotel_name,descriptions,city,phoneHotel,stars,imageHotel}=req.body;
-      const updateToDo=await pool.query(
-        "UPDATE hotelInfo SET hotel_name=$1,descriptions=$2,city=$3,phoneHotel=$4,stars=$5,imageHotel=$6 WHERE hotel_id=$7",
-        [hotel_name,descriptions,city,phoneHotel,stars,imageHotel,id]
+      const {hotelName,descriptionh,city,phonNumber,rating,base64codeh}= req.body;
+      const update=await pool.query(
+        "UPDATE hotelinfo SET hotel_name=$1,descriptions=$2,city=$3,phonehotel=$4,stars=$5,imageHotel=$6 WHERE hotel_id=$7",
+        [hotelName,descriptionh,city,phonNumber,rating,base64codeh,id]
       );
       res.json("hotels WAS UPDATING ")
     } catch (error) {
