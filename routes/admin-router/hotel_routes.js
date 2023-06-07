@@ -14,6 +14,18 @@ router.get("/hotels", (req, res) => {
       }
     });
   });
+  // show trash
+router.get("/hotels/retrev", (req, res) => {
+    pool.query("SELECT * FROM hotelinfo where is_deleted = true and is_accept = true", (error, result) => {
+      if (error) {
+        console.error("Error executing query", error);
+        res.status(500).send("Error executing query");
+      } else {
+        res.json(result.rows);
+        
+      }
+    });
+  });
 
 
   // soft delete hotel
@@ -25,6 +37,20 @@ router.get("/hotels", (req, res) => {
         [id]
       );
       res.send("Deleted Successfully");
+    } catch (err) {
+      console.log(err.message);
+    }
+  });
+
+  // retrev hotel
+  router.put("/hotels/retrev/:id", async function (req, res) {
+    try {
+      const { id } = req.params;
+      const del = await pool.query(
+       'UPDATE hotelinfo SET is_deleted = false WHERE hotel_id = $1',
+        [id]
+      );
+      res.send("retreved Successfully");
     } catch (err) {
       console.log(err.message);
     }
